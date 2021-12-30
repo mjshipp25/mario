@@ -1,7 +1,7 @@
 import pygame
 import sys
 from settings import screen_height
-from support import import_folder
+from support import import_folder, scale
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, surface, create_jump_particles):
@@ -44,10 +44,11 @@ class Player(pygame.sprite.Sprite):
 
         for animation in self.animations.keys():
             full_path = character_path + animation
-            self.animations[animation] = import_folder(full_path, True, 2.5)
+            self.animations[animation] = import_folder(full_path)
+            self.animations[animation] = scale(self.animations[animation], 2.5)
 
     def import_dust_run_particles(self):
-        self.dust_run_particles = import_folder('../graphics/character/dust_particles/run', False, 1)
+        self.dust_run_particles = import_folder('../graphics/character/dust_particles/run')
 
     def animate(self):
         animation = self.animations[self.status]
