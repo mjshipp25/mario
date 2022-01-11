@@ -1,7 +1,10 @@
-import pygame
-from tiles import AnimatedTile
 from random import randint
+
+import pygame
+
 from support import scale
+from tiles import AnimatedTile
+
 
 class Enemy(AnimatedTile):
     def __init__(self, size, x, y):
@@ -10,14 +13,14 @@ class Enemy(AnimatedTile):
         self.image = self.frames[self.frame_index]
         self.rect.y += size - self.image.get_height()
         self.speed = randint(3, 5)
-        
+
     def move(self):
-        self.rect.x += self.speed        
+        self.rect.x += self.speed
 
     def reverse_image(self):
         if self.speed < 0:
-            self.image = pygame.transform.flip (self.image, True, False) # x, y
-        
+            self.image = pygame.transform.flip(self.image, True, False)  # x, y
+
     def reverse(self):
         self.speed *= -1
 

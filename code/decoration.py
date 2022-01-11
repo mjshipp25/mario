@@ -1,21 +1,29 @@
-import pygame 
-from settings import vertical_tile_number, tile_size, screen_width
-from tiles import AnimatedTile, StaticTile
-from support import import_folder
 from random import choice, randint
+
+import pygame
+
+from settings import screen_width, tile_size, vertical_tile_number
+from support import import_folder
+from tiles import AnimatedTile, StaticTile
+
 
 class Sky:
     def __init__(self, horizon):
-        self.top = pygame.image.load('../graphics/decoration/sky/sky_top.png').convert()
-        self.bottom = pygame.image.load('../graphics/decoration/sky/sky_bottom.png').convert()
-        self.middle = pygame.image.load('../graphics/decoration/sky/sky_middle.png').convert()
+        self.top = pygame.image.load(
+            '../graphics/decoration/sky/sky_top.png').convert()
+        self.bottom = pygame.image.load(
+            '../graphics/decoration/sky/sky_bottom.png').convert()
+        self.middle = pygame.image.load(
+            '../graphics/decoration/sky/sky_middle.png').convert()
         self.horizon = horizon
 
-        # stretch 
+        # stretch
         self.top = pygame.transform.scale(self.top, (screen_width, tile_size))
-        self.bottom = pygame.transform.scale(self.bottom, (screen_width, tile_size))
-        self.middle = pygame.transform.scale(self.middle, (screen_width, tile_size))
-    
+        self.bottom = pygame.transform.scale(
+            self.bottom, (screen_width, tile_size))
+        self.middle = pygame.transform.scale(
+            self.middle, (screen_width, tile_size))
+
     def draw(self, surface):
         for row in range(vertical_tile_number):
             y = row * tile_size
@@ -26,11 +34,13 @@ class Sky:
             else:
                 surface.blit(self.bottom, (0, y))
 
+
 class Water:
     def __init__(self, top, level_width):
         water_start = -screen_width
         water_tile_width = 192
-        tile_x_amount = int((level_width + screen_width * 2) / water_tile_width)
+        tile_x_amount = int(
+            (level_width + screen_width * 2) / water_tile_width)
         self.water_sprites = pygame.sprite.Group()
 
         for tile in range(tile_x_amount):
@@ -42,6 +52,7 @@ class Water:
     def draw(self, surface, shift):
         self.water_sprites.update(shift)
         self.water_sprites.draw(surface)
+
 
 class Clouds:
     def __init__(self, horizon, level_width, cloud_number):

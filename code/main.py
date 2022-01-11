@@ -8,16 +8,21 @@ Image Assets from "analogStudios_" on itch.io for the camelot_ pack (https://ana
     and from "Pixel Frog" on itch.io for the Kings and Pigs tileset (https://pixelfrog-assets.itch.io/kings-and-pigs)
 '''
 
-import pygame, sys
-from settings import *
+import sys
+
+import pygame
+
+from game_data import level_0, level_1
 from level import Level
-from game_data import level_0
+from levelselect import LevelSelect
+from settings import *
 
 # Pygame setup
-pygame.init( )
+pygame.init()
 screen = pygame.display.set_mode((screen_width, screen_height))
 clock = pygame.time.Clock()
-level = Level(level_0, screen)
+level_select = LevelSelect()
+level = Level(level_select, screen)
 
 
 while True:
